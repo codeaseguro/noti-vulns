@@ -1,4 +1,9 @@
 # Tabla de Contenidos
+* [ADV-2025-9901 |SSH-Snake: Gusano de Red Autorreplicante](#adv-2025-9901---ssh-snake-gusano-de-red-autorreplicante)
+    * [Detalles Técnicos](#detalles-técnicos)
+    * [Tecnologias Afectadas](#tecnologias-afectadas)
+    * [Como evitar vulnerabilidad](#evitar-esta-vulnerabilidad--mitigar-riesgos)
+    * [Referencias](#documentacion-oficial-y-referencias)
 * [MAL-2025-1024 | PyStoreRAT (Ecosistema PyPI)](#mal-2025-1024---pystorerat-malware-en-el-ecosistema-pypi)
     * [¿Qué significa PyStoreRAT?](#que-significa-pystorerat)
     * [Detalles Técnicos](#detalles-técnicos)
@@ -9,6 +14,47 @@
 * [CVE-2025-55182 | React2Shell (RCE)](#cve-2025-55182---react2shell-rce-crítico-en-react-server-components)
     * [Tecnologías Afectadas](#tecnologias-afectadas)
     * [Evitar esta vulnerabilidad](#evitar-esta-vulnerabilidad--mitigar-riesgos)
+---
+
+# [ADV-2025-9901] - SSH-Snake: Gusano de Red Autorreplicante
+
+> [!IMPORTANT]
+>
+> Esta amenaza consiste en un gusano de red (worm) diseñado para automatizar el movimiento lateral. Utiliza llaves SSH descubiertas en un sistema para propagarse de forma autónoma a través de toda una infraestructura de servidores.
+
+### Detalles Técnicos
+
+* ID: ADV-2025-9901 (Identificado por investigadores de seguridad en 2024/2025).
+* Severidad: Alta / Crítica (Dependiendo de la exposición de llaves).
+* Tipo: Gusano de red para movimiento lateral.
+* Posible ataque: Una vez que el atacante obtiene acceso inicial, el script escanea el sistema buscando llaves privadas y archivos de hosts conocidos. Al encontrarlos, intenta conectarse automáticamente a cada destino, replicándose a sí mismo en cada nuevo servidor comprometido sin intervención humana.
+
+### Tecnologias afectadas
+
+* Sistemas Operativos: Distribuciones de Linux (Ubuntu, Debian, CentOS, RHEL).
+* Protocolos: SSH (Secure Shell) con autenticación basada en llaves privadas.
+* Entornos: Servidores en la nube (AWS, Azure, GCP) y centros de datos on-premise que no utilicen frases de contraseña (passphrases) en sus llaves.
+
+> [!CAUTION]
+>
+> A diferencia de otros ataques, SSH-Snake es particularmente difícil de detectar porque utiliza herramientas legítimas del sistema y credenciales válidas encontradas en el propio servidor para moverse de un equipo a otro.
+
+### Evitar esta vulnerabilidad / Mitigar riesgos
+
+Para proteger los entornos contra este tipo de propagación automática, se recomienda seguir las siguientes medidas:
+
+| Medida | Acción Correctiva |
+| --- | --- |
+| Cifrado de llaves | Implementar el uso obligatorio de passphrases en todas las llaves privadas. |
+| SSH Agent | Deshabilitar SSH Agent Forwarding en servidores de salto o producción. |
+| Limpieza de hosts | Mantener el archivo known_hosts depurado y limitar los permisos de lectura de las carpetas .ssh. |
+
+### Documentación Oficial y Referencias
+
+* [Análisis de Sysdig](https://www.google.com/search?q=https://sysdig.com/blog/ssh-snake-intelligent-worm/)
+* [Informe de Threat Intel - SentinelOne](https://www.google.com/search?q=https://www.sentinelone.com/labs/ssh-snake-worm-analysis/)
+* [Mitre ATT&CK - Lateral Movement](https://attack.mitre.org/tactics/TA0008/)
+
 ---
 
 # [MAL-2025-1024] - PyStoreRAT: Malware en el Ecosistema PyPI
