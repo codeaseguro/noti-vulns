@@ -1,7 +1,8 @@
 # [CVE-2025-55182] - React2Shell: RCE Crítico en React Server Components
 
-[!IMPORTANT]
->Esta vulnerabilidad es un **"Must-Patch"** inmediato. Es una vulnerabilidad del tipo RCE (Remote Code Execution) y afecta al núcleo de React 19 y, por extensión, a NextJs y cualquier otro framework que utilice React Server Components (RSC).
+> [!IMPORTANT]
+> 
+> Esta vulnerabilidad es un **"Must-Patch"** inmediato. Es una vulnerabilidad del tipo RCE (Remote Code Execution) y afecta al núcleo de React 19 y, por extensión, a NextJs y cualquier otro framework que utilice React Server Components (RSC).
 
 ### Detalles Técnicos
 - ID: CVE-2025-55182 (también rastreada inicialmente como CVE-2025-66478 en NextJS).
@@ -15,7 +16,9 @@
 - Otros: React Router RSC preview, Redwood SDK, Waku y plugins de Vite/Parcel para RSC.
 
 
-[!CAUTION] A partir de esta vulnerabilidad se confirmo que las aplicaciones creadas con create-next-app bajo configuraciones por defecto son vulnerables sin necesidad de que los desarrolladores haya cometido errores de código.
+> [!CAUTION]
+>
+> A partir de esta vulnerabilidad se confirmo que las aplicaciones creadas con create-next-app bajo configuraciones por defecto son vulnerables sin necesidad de que los desarrolladores haya cometido errores de código.
 
 ### Evitar esta vulnerabilidad / Mitigar riesgos
 
@@ -27,9 +30,11 @@ Si estas usando alguna de estas tecnologias actualiza a las versiones ya parchea
 | Next.js 15/16 | 15.0.5, 15.1.9, 15.5.7, 16.0.7|
 | Next.js 14 (Canary) | Downgrade a 14.2.35 o estable |
 
-[!TIP] Si usas Next.js, puedes ejecutar este comando para verificar y arreglar tu proyecto automáticamente: npx fix-react2shell-next
+> [!TIP]
+>
+> Si usas Next.js, puedes ejecutar este comando para verificar y arreglar tu proyecto automáticamente: `npx fix-react2shell-next`
 
-## Documentación Oficial y Referencias
+### Documentación Oficial y Referencias
 
 - [Blog oficial React](https://react.dev/blog/2025/12/03/critical-security-vulnerability-in-react-server-components)
 - [Vercel](https://vercel.com/changelog/cve-2025-55182)
