@@ -1,3 +1,65 @@
+# Tabla de Contenidos
+* [MAL-2025-1024 | PyStoreRAT (Ecosistema PyPI)](#mal-2025-1024---pystorerat-malware-en-el-ecosistema-pypi)
+    * [¿Qué significa PyStoreRAT?](#que-significa-pystorerat)
+    * [Detalles Técnicos](#detalles-técnicos)
+    * [Mitigación](#mitigación)
+* [CVE-2025-62221 | Zero-Day Windows (EoP)](#cve-2025-62221---zero-day)
+    * [De qué trata](#de-que-trata)
+    * [Sistemas Afectados](#sistemas-afectados)
+* [CVE-2025-55182 | React2Shell (RCE)](#cve-2025-55182---react2shell-rce-crítico-en-react-server-components)
+    * [Tecnologías Afectadas](#tecnologias-afectadas)
+    * [Evitar esta vulnerabilidad](#evitar-esta-vulnerabilidad--mitigar-riesgos)
+---
+
+# [MAL-2025-1024] - PyStoreRAT: Malware en el Ecosistema PyPI
+
+> [!CAUTION]
+> 
+> PyStoreRAT no es un error de código accidental (CVE), sino un malware diseñado intencionalmente (RAT - Remote Access Trojan) que se distribuyó a través de paquetes maliciosos en PyPI mediante typosquatting. Es una amenaza crítica para repositorios de trabajo como GitHub y servidores CI/CD.
+
+### Que significa PyStoreRAT
+Es el nombre que le pusieron los investigadores a uno de estos malwares:
+- Py → porque el malware esta parcial o totalmente codificado con Python.
+- Store → hace referencia a que no son stores oficiales, sino que se disfrazan como herramientas utiles.
+- RAT → es el tipo de malware en este caso Remote Access Trojan.
+
+
+### Detalles Técnicos
+- ID: MAL-2025-1024 (Registro en bases de datos de malware de cadena de suministro).
+- Tipo: Troyano de Acceso Remoto (RAT) / Infostealer.
+- Posible ataque: Typosquatting (nombres de paquetes similares a populares como requests-py, boto3-session, etc) e inyección de dependencias.
+- Mecanismo: Al clonar un repositorio disfrazado con este malware, instalar un paquete, un script setup.py oculto descarga un binario ofuscado que establece una conexión persistente vía C2 (Command & Control) utilizando el protocolo de Microsoft Store como túnel para evadir firewalls.
+
+### Que hace el malware
+- Roba credenciales, como archivos secretos .env, tokens, llaves SSH, sesiones de navegadores.
+- Persistencia: Se inyecta en el proceso de inicio del sistema operativo (Windows/Linux).
+- Captura de pantalla constante enviada al atacante.
+
+### Tecnologías / Entornos Afectados
+- Desarrolladores Python: Cualquier entorno que haya instalado paquetes maliciosos identificados.
+- Pip: Versiones de pip que no verifiquen hashes de paquetes.
+- Entornos CI/CD: Pipelines de GitHub Actions o GitLab que descarguen dependencias sin bloquear versiones específicas.
+
+>[!IMPORTANT]
+>
+> A diferencia de una vulnerabilidad normal, eliminar el paquete malicioso no es suficiente para limpiar el sistema, ya que el malware instala una "puerta trasera" independiente del entorno de Python.
+
+### Mitigación
+Si sospechas que fuiste infectado y si usas principalmente python, o descargaste un paquete sospechoso, segui estos pasos:
+1. Verifica ejecuta el siguiente comando `pip list`y analiza si hay algun paquete con nombre raro o sospechoso que contenga algun script malicioso.
+2. Cambia las claves secretas y privadas que tenias en tu entorno.
+
+> [!TIP]
+> 
+> Para prevenir futuros ataques de este tipo, utiliza siempre archivos requirements.txt con hashes verificados: `pip install --require-hashes -r requirements.txt`.
+
+### Documentación Oficial y Referencias
+- [PyPI Security](https://pypi.org/security/)
+- [morphisec](https://www.morphisec.com/blog/pystorerat-a-new-ai-driven-supply-chain-malware-campaign-targeting-it-osint-professionals/)
+- [Boradcom](https://www.broadcom.com/support/security-center/protection-bulletin/pystorerat-malware)
+
+----
+
 # [CVE-2025-62221] - Zero Day
 
 > [!IMPORTANT]
