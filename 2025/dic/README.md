@@ -1,3 +1,36 @@
+# [CVE-2025-62221] - Zero Day
+
+> [!IMPORTANT]
+>
+> Esta vulnerabilidad afecta a un componente del sistema operativo que la mayoría de los usuarios utiliza sin saberlo: el Windows Cloud Files Mini Filter Driver (cldflt.sys).
+
+## De que trata
+Es una falla de Elevación de Privilegios (EoP). Lo que la hace peligrosa es que es un Zero-day, lo que significa que los atacantes la descubrieron y la empezaron a usar antes de que Microsoft tuviera el parche listo.
+
+Un atacante que ya tiene acceso básico al equipo (un usuario normal sin permisos) puede ejecutar un script que aproveche ese error de memoria para engañar al sistema y obtener privilegios de SYSTEM (el nivel de control más alto en Windows).
+
+> [!CAUTION]
+> 
+> **Estado:** Explotada activamente (Bajo ataque).
+> **Gravedad:** 7.8 (Alta/Crítica en contexto de cadena de ataque).
+
+**Sistemas Afectados:**
+- Windows 10 (desde 1809 hasta 22H2).
+- Windows 11 (21H2, 22H2, 23H2, 24H2).
+- Windows Server 2019, 2022 y 2025.
+
+
+> [!IMPORTANT]
+>
+> Se requiere la actualización acumulativa de **Diciembre 2025** para mitigar este riesgo.
+
+### Documentacion oficial y referencias
+- [Microsoft Security Response Center (MSRC)](https://msrc.microsoft.com/update-guide/vulnerability/CVE-2025-62221)
+- [NIST](https://nvd.nist.gov/vuln/detail/CVE-2025-62221)
+- [CISA](https://support.broadcom.com/web/ecx/support-content-notification/-/external/content/SecurityAdvisories/0/24968)
+
+----
+
 # [CVE-2025-55182] - React2Shell: RCE Crítico en React Server Components
 
 > [!IMPORTANT]
